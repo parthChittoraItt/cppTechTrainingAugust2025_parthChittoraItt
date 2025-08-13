@@ -19,7 +19,7 @@ double fn(string &s)
   int decimalIndex = -1;
   bool posflag = true; // flag for positive sign 
   bool invalid; // flag to check if there is some invalid character before decimal
-  decimalIndex = s.find('.');
+  decimalIndex = s.find('.'); 
 
   if (decimalIndex != -1) 
   {
