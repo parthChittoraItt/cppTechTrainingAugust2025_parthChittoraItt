@@ -4,12 +4,14 @@
 #include <cstdlib>
 #include <string>
 using namespace std;
+long parseBeforeDecimalPart(){
+
+}
 double atofn(string &s)
 {
-  int size = s.size();
+  int size = s.size();  
   int spaceCounter = 0;
 
-  // to eliminate whitespaces basically to point from where the string starts "   +1223.43"
   while (spaceCounter < size && s[spaceCounter] == ' ')                           
   {
     spaceCounter++;
@@ -17,10 +19,9 @@ double atofn(string &s)
 
   double ans = 0;
   int decimalIndex = -1;
-  bool posflag = true; // flag for positive sign 
-  bool invalid; // flag to check if there is some invalid character before decimal
+  bool posflag = true; 
+  bool invalid; 
   decimalIndex = s.find('.'); 
-
   if (decimalIndex != -1) 
   {
     int validcharCount = 0; //counter helping the number to parse
@@ -33,7 +34,7 @@ double atofn(string &s)
           posflag = false;
       }
 
-      else if (ch < '0' || ch > '9' && (ch != '+' || ch != '-')) // 12df.34
+      else if (ch < '0' || ch > '9' && (ch != '+' || ch != '-')) // d12df34.34
       {
         validcharCount = 0;
         ans = 0;
@@ -49,7 +50,8 @@ double atofn(string &s)
     }
 
     // after decimal part
-    if (!invalid) // checks if there is any invalid character before the decimal
+    // checks if there is any invalid character before the decimal
+    if (!invalid)
     {
       int exp = -1;
       int i = decimalIndex + 1;
@@ -61,7 +63,7 @@ double atofn(string &s)
       }
 
       // handles scientific notation
-      if (i < s.size() && (s[i] == 'e' || s[i] == 'E'))
+      if (i < s.size() && (s[i] == 'e' || s[i] == 'E')) //"1.2e12"
       {
         i++;
         bool expPos = true;
@@ -82,7 +84,7 @@ double atofn(string &s)
         if (expPos)
           ans *= pow(10, exponent); 
         else
-          ans /= pow(10, exponent); // for -ve exponents we divide basicall 10^-n;
+          ans /= pow(10, exponent);
       }
     }
   }
@@ -126,9 +128,11 @@ double atofn(string &s)
 int main()
 {
   string st;
+  // const char* ptr = ;
   cout << "Enter a string : ";
   getline(cin, st);
   double result = atofn(st);
   cout << "Double value : " << fixed <<setprecision(15) << result << endl;
+  cout<< "Atofn value :" << atof(st.c_str()) <<endl;
   return 0;
 }
