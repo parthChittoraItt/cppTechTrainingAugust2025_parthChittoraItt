@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <string>
 using namespace std;
-double fn(string &s)
+double atofn(string &s)
 {
   int size = s.size();
   int spaceCounter = 0;
@@ -128,7 +128,7 @@ int main()
   string st;
   cout << "Enter a string : ";
   getline(cin, st);
-  double result = fn(st);
+  double result = atofn(st);
   cout << "Double value : " << fixed <<setprecision(15) << result << endl;
   return 0;
 }
