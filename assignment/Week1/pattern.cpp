@@ -1,12 +1,30 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 #define ll long long
-using namespace std;
+// using namespace std;
+ll stringToInt(const std::string &input, bool &success)
+{
+    std::stringstream ss(input);
+    ll number;
+    ss >> number;
+    if (!ss.fail() && ss.eof())
+    {
+        success = true;
+        return number;
+    }
+    else
+    {
+        success = false;
+        return 0;
+    }
+}
 void printAlternateBits(ll n)
 {
     short bit = 1;
     for (int i = 0; i < n; i++)
     {
-        cout << bit;
+        std::cout << bit;
         bit = bit ^ 1;
     }
 }
@@ -14,7 +32,7 @@ void printSpaces(ll count)
 {
     for (int i = 0; i < count; i++)
     {
-        cout << " ";
+        std::cout << " ";
     }
 }
 void printUpperPortion(ll count, ll totalRowsToPrint)
@@ -26,7 +44,7 @@ void printUpperPortion(ll count, ll totalRowsToPrint)
             printAlternateBits(row + 1);
             printSpaces(2 * (count - row));
             printAlternateBits(row + 1);
-            cout << endl;
+            std::cout << std::endl;
         }
         else if (count % 2 == 0)
         {
@@ -40,7 +58,7 @@ void printUpperPortion(ll count, ll totalRowsToPrint)
                 printSpaces(2 * (count - row) - 1);
                 printAlternateBits(row + 1);
             }
-            cout << endl;
+            std::cout << std::endl;
         }
     }
 }
@@ -53,56 +71,52 @@ void printLowerPortion(ll count, ll totalRowsToPrint)
             printAlternateBits(totalRowsToPrint - row);
             printSpaces(2 * (row - count));
             printAlternateBits(totalRowsToPrint - row);
-            cout << endl;
+            std::cout << std::endl;
         }
         else if (count % 2 == 0)
         {
             printAlternateBits(totalRowsToPrint - row);
             printSpaces(2 * (row - count) - 1);
             printAlternateBits(totalRowsToPrint - row);
-            cout << endl;
+            std::cout << std::endl;
         }
     }
 }
 void printPattern()
-{   cin.ignore(1000 , '\n');
+{
     ll count{};
-    cout << "Enter the value of count (Poistive Integer): ";
-    cin >> count;
-    cin.ignore();
-    if (cin.fail())
+    bool success;
+    std::cout << "Enter the value of count (Positive Integer): ";
+    std::string st;
+    std::getline(std::cin, st);
+    count = stringToInt(st, success);
+    if (!success)
     {
-        cin.clear();
-        cin.ignore(1000, '\n');
+        std::cout << "Enter integer values only." << std::endl;
+        return;
+    }
+    if (count < 0)
+    {
+        std::cout << "Please enter a positive integer." << std::endl;
+        return;
     }
     ll totalRowsToPrint = count * 2 + 1;
-    if (count >= 0)
-    {
-        printUpperPortion(count, totalRowsToPrint);
-        printLowerPortion(count, totalRowsToPrint);
-    }
-    else
-    {
-        cout << "Please enter a positive integer." << endl;
-    }
+    printUpperPortion(count, totalRowsToPrint);
+    printLowerPortion(count, totalRowsToPrint);
 }
 
 int main()
 {
     while (true)
     {
-        
-        cout << "\n1. Print Pattern" << endl;
-        cout << "2. Exit" << endl;
-        cout << "Enter choice :";
+        std::cout << "\n1. Print Pattern" << std::endl;
+        std::cout << "2. Exit" << std::endl;
+        std::cout << "Enter choice :";
         int choice;
-        cin >> choice;
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(1000,'\n');
-            cout << "Enter integer only." << endl;
-        }
+        bool success;
+        std::string choiceStr;
+        std::getline(std::cin, choiceStr);
+        choice = stringToInt(choiceStr, success);
         if (choice == 1)
         {
             printPattern();
@@ -112,8 +126,7 @@ int main()
             break;
         }
         else
-            cout << "Enter a valid choice.";
-        cin.ignore(1000 , '\n');
+            std::cout << "Enter a valid choice."<<std::endl;
     }
     return 0;
 }
