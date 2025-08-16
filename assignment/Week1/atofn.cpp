@@ -1,138 +1,142 @@
 #include <iostream>
-#include <math.h>
-#include <iomanip>
-#include <cstdlib>
+#include <cmath>
 #include <string>
-using namespace std;
-long parseBeforeDecimalPart(){
+#include <sstream>
 
-}
-double atofn(string &s)
+bool validDigit(char ch)
 {
-  int size = s.size();  
-  int spaceCounter = 0;
-
-  while (spaceCounter < size && s[spaceCounter] == ' ')                           
-  {
-    spaceCounter++;
-  }
-
-  double ans = 0;
-  int decimalIndex = -1;
-  bool posflag = true; 
-  bool invalid; 
-  decimalIndex = s.find('.'); 
-  if (decimalIndex != -1) 
-  {
-    int validcharCount = 0; //counter helping the number to parse
-    for (int i = decimalIndex - 1; i >= spaceCounter; i--)
-    {
-      char ch = s[i];
-      if ((ch == '+' || ch == '-') && i == spaceCounter) //+123
-      {
-        if (ch == '-')
-          posflag = false;
-      }
-
-      else if (ch < '0' || ch > '9' && (ch != '+' || ch != '-')) // d12df34.34
-      {
-        validcharCount = 0;
-        ans = 0;
-        invalid = true;
-        continue;
-      }
-      else
-      {
-        int val = s[i] - '0';
-        ans += val * pow(10, validcharCount);
-        validcharCount++;
-      }
-    }
-
-    // after decimal part
-    // checks if there is any invalid character before the decimal
-    if (!invalid)
-    {
-      int exp = -1;
-      int i = decimalIndex + 1;
-      while (i < s.size() && isdigit(s[i]))
-      {
-        int val = s[i] - '0';
-        ans += val * pow(10, exp--);
-        i++;
-      }
-
-      // handles scientific notation
-      if (i < s.size() && (s[i] == 'e' || s[i] == 'E')) //"1.2e12"
-      {
-        i++;
-        bool expPos = true;
-        if (i < s.size() && (s[i] == '+' || s[i] == '-'))
-        {
-          if (s[i] == '-')
-            expPos = false;
-          i++;
-        }
-
-        int exponent = 0;
-        while (i < s.size() && isdigit(s[i]))
-        {
-          exponent = exponent * 10 + (s[i] - '0');
-          i++;
-        }
-
-        if (expPos)
-          ans *= pow(10, exponent); 
-        else
-          ans /= pow(10, exponent);
-      }
-    }
-  }
-
-  // For without decimal number (similar to the before decimal part)
-  else
-  {
-    int validcharCount = 0;
-
-    for (int i = s.size(); i >= spaceCounter; i--)
-    {
-      char ch = s[i];
-
-      if ((ch == '+' || ch == '-') && i == spaceCounter) //+123
-      {
-        if (ch == '-')
-          posflag = false;
-        return posflag ? ans : -1 * ans;
-      }
-
-      else if (ch < '0' || ch > '9') // 12df.34
-      {
-        validcharCount = 0;
-        ans = 0;
-        continue;
-      }
-      else
-      {
-        int val = s[i] - '0';
-        ans += val * pow(10, validcharCount);
-        validcharCount++;
-      }
-    }
-  }
-  return posflag ? ans : -1 * ans;
+    return (ch >= '0' && ch <= '9');
 }
 
+void printMenu()
+{
+    std::cout << "\n1. Use atof value." << std::endl;
+    std::cout << "2. Exit." << std::endl;
+    std::cout << "Enter choice: ";
+}
 
+int getUserChoice()
+{
+    std::string choiceStr;
+    std::getline(std::cin, choiceStr);
+    bool checkInputValidity;
+    std::stringstream ss(choiceStr);
+    int number;
+    ss >> number;
+    checkInputValidity = (!ss.fail() && ss.eof());
+    return checkInputValidity ? number : 0;
+}
 
+bool parseSign(const char *s, int &i)
+{
+    bool isPositive = true;
+    if (s[i] == '-')
+    {
+        isPositive = false;
+        i++;
+    }
+    else if (s[i] == '+')
+    {
+        i++;
+    }
+    return isPositive;
+}
+
+double parseIntegerPart(const char *s, int &i)
+{
+    double result = 0.0;
+    while (validDigit(s[i]))
+    {
+        result = result * 10 + (s[i] - '0');
+        i++;
+    }
+    return result;
+}
+
+double parseFractionPart(const char *s, int &i)
+{
+    if (s[i] != '.')
+        return 0;
+    i++;
+    double result = 0;
+    double divisor = 10;
+    while (validDigit(s[i]))
+    {
+        result += (s[i] - '0') / divisor;
+        divisor *= 10;
+        i++;
+    }
+    return result;
+}
+
+double parseExponent(const char *s, int &i)
+{
+    if (s[i] != 'e' && s[i] != 'E')
+        return 1;
+    i++;
+    bool isPositive = true;
+    if (s[i] == '-')
+    {
+        isPositive = false;
+        i++;
+    }
+    else if (s[i] == '+')
+    {
+        i++;
+    }
+    int exponent = 0;
+    while (validDigit(s[i]))
+    {
+        exponent = exponent * 10 + (s[i] - '0');
+        i++;
+    }
+    return isPositive ? pow(10, exponent) : 1 / pow(10, exponent);
+}
+
+double atofn(const char *s)
+{
+    int i = 0;
+    while (s[i] == ' ')
+    {
+        i++;
+    }
+    bool isPositive = parseSign(s, i);
+    double integerPart = parseIntegerPart(s, i);
+    double fractionPart = parseFractionPart(s, i);
+    double base = integerPart + fractionPart;
+    double exponent = parseExponent(s, i);
+    double result = base * exponent;
+    return isPositive ? result : -result;
+}
+void processAtofnInput()
+{
+    std::string input;
+    std::cout << "Enter a string: ";
+    std::getline(std::cin, input);
+    const char *cstr = input.c_str();
+    double result = atofn(cstr);
+    std::cout << "Custom atofn value : " << result << std::endl;
+    std::cout << "Built-in atof value: " << atof(cstr) << std::endl;
+}
 
 int main()
 {
-  string st;
-  // const char* ptr = ;
-  cout << "Enter a string : ";
-  getline(cin, st);
-  double result = atofn(st);
-  cout << "Double value : " << fixed <<setprecision(15) << result << endl;
-  cout<< "Atofn value :" << atof(st.c_str()) <<endl;
-  return 0;
+    while (true)
+    {
+        printMenu();
+        int choice = getUserChoice();
+        if (choice == 1)
+        {
+            processAtofnInput();
+        }
+        else if (choice == 2)
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "Enter a valid choice." << std::endl;
+        }
+    }
+    return 0;
 }
