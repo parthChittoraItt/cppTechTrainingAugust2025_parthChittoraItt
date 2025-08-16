@@ -2,7 +2,6 @@
 #include <sstream>
 #include <string>
 #define ll long long
-// using namespace std;
 ll stringToInt(const std::string &input, bool &success)
 {
     std::stringstream ss(input);
@@ -104,19 +103,30 @@ void printPattern()
     printUpperPortion(count, totalRowsToPrint);
     printLowerPortion(count, totalRowsToPrint);
 }
+void printMenu()
+{
+    std::cout << "\n1. Print Pattern" << std::endl;
+    std::cout << "2. Exit" << std::endl;
+    std::cout << "Enter choice :";
+}
+int getUserChoice()
+{
+    std::string choiceStr;
+    std::getline(std::cin, choiceStr);
+    bool checkInputValidity;
+    std::stringstream ss(choiceStr);
+    int number;
+    ss >> number;
+    checkInputValidity = (!ss.fail() && ss.eof());
+    return checkInputValidity ? number : 0;
+}
 
 int main()
 {
     while (true)
     {
-        std::cout << "\n1. Print Pattern" << std::endl;
-        std::cout << "2. Exit" << std::endl;
-        std::cout << "Enter choice :";
-        int choice;
-        bool success;
-        std::string choiceStr;
-        std::getline(std::cin, choiceStr);
-        choice = stringToInt(choiceStr, success);
+        printMenu();
+        int choice = getUserChoice();
         if (choice == 1)
         {
             printPattern();
@@ -126,7 +136,7 @@ int main()
             break;
         }
         else
-            std::cout << "Enter a valid choice."<<std::endl;
+            std::cout << "Enter a valid choice." << std::endl;
     }
     return 0;
 }
