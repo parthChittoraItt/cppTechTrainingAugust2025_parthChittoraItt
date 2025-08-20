@@ -3,9 +3,9 @@
 #include <string>
 #include <sstream>
 
-bool validDigit(char ch)
+bool validDigit(char inputcharacter)
 {
-    return (ch >= '0' && ch <= '9');
+    return (inputcharacter >= '0' && inputcharacter <= '9');
 }
 
 void printMenu()
@@ -27,84 +27,84 @@ int getUserChoice()
     return checkInputValidity ? number : 0;
 }
 
-bool parseSign(const char *s, int &i)
+bool parseSign(const char *s, int &charPointer)
 {
     bool isPositive = true;
-    if (s[i] == '-')
+    if (s[charPointer] == '-')
     {
         isPositive = false;
-        i++;
+        charPointer++;
     }
-    else if (s[i] == '+')
+    else if (s[charPointer] == '+')
     {
-        i++;
+        charPointer++;
     }
     return isPositive;
 }
 
-double parseIntegerPart(const char *s, int &i)
+double parseIntegerPart(const char *s, int &charPointer)
 {
     double result = 0.0;
-    while (validDigit(s[i]))
+    while (validDigit(s[charPointer]))
     {
-        result = result * 10 + (s[i] - '0');
-        i++;
+        result = result * 10 + (s[charPointer] - '0');
+        charPointer++;
     }
     return result;
 }
 
-double parseFractionPart(const char *s, int &i)
+double parseFractionPart(const char *s, int &charPointer)
 {
-    if (s[i] != '.')
+    if (s[charPointer] != '.')
         return 0;
-    i++;
+    charPointer++;
     double result = 0;
     double divisor = 10;
-    while (validDigit(s[i]))
+    while (validDigit(s[charPointer]))
     {
-        result += (s[i] - '0') / divisor;
+        result += (s[charPointer] - '0') / divisor;
         divisor *= 10;
-        i++;
+        charPointer++;
     }
     return result;
 }
 
-double parseExponent(const char *s, int &i)
+double parseExponent(const char *s, int &charPointer)
 {
-    if (s[i] != 'e' && s[i] != 'E')
+    if (s[charPointer] != 'e' && s[charPointer] != 'E')
         return 1;
-    i++;
+    charPointer++;
     bool isPositive = true;
-    if (s[i] == '-')
+    if (s[charPointer] == '-')
     {
         isPositive = false;
-        i++;
+        charPointer++;
     }
-    else if (s[i] == '+')
+    else if (s[charPointer] == '+')
     {
-        i++;
+        charPointer++;
     }
     int exponent = 0;
-    while (validDigit(s[i]))
+    while (validDigit(s[charPointer]))
     {
-        exponent = exponent * 10 + (s[i] - '0');
-        i++;
+        exponent = exponent * 10 + (s[charPointer] - '0');
+        charPointer++;
     }
     return isPositive ? pow(10, exponent) : 1 / pow(10, exponent);
 }
 
 double atofn(const char *s)
 {
-    int i = 0;
-    while (s[i] == ' ')
+    int charPointer = 0;
+    while (s[charPointer] == ' ')
     {
-        i++;
+        charPointer++;
     }
-    bool isPositive = parseSign(s, i);
-    double integerPart = parseIntegerPart(s, i);
-    double fractionPart = parseFractionPart(s, i);
+    bool isPositive = parseSign(s, charPointer);
+    double integerPart = parseIntegerPart(s, charPointer);
+    double fractionPart = parseFractionPart(s, charPointer);
     double base = integerPart + fractionPart;
-    double exponent = parseExponent(s, i);
+    double exponent = parseExponent(s, charPointer);
     double result = base * exponent;
     return isPositive ? result : -result;
 }

@@ -4,10 +4,10 @@
 #define ll long long
 ll stringToInt(const std::string &input, bool &success)
 {
-    std::stringstream ss(input);
+    std::stringstream inputStringStream(input);
     ll number;
-    ss >> number;
-    if (!ss.fail() && ss.eof())
+    inputStringStream >> number;
+    if (!inputStringStream.fail() && inputStringStream.eof())
     {
         success = true;
         return number;
@@ -21,7 +21,7 @@ ll stringToInt(const std::string &input, bool &success)
 void printAlternateBits(ll n)
 {
     short bit = 1;
-    for (int i = 0; i < n; i++)
+    for (int bitIterator = 0; bitIterator < n; bitIterator++)
     {
         std::cout << bit;
         bit = bit ^ 1;
@@ -29,7 +29,7 @@ void printAlternateBits(ll n)
 }
 void printSpaces(ll count)
 {
-    for (int i = 0; i < count; i++)
+    for (int spaceIterator = 0; spaceIterator < count; spaceIterator++)
     {
         std::cout << " ";
     }
