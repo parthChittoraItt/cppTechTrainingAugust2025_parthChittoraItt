@@ -11,7 +11,6 @@ struct calculatorFunctions
     calc_fn multiplyTwoNumbers;
     calc_fn divideTwoNumbers;
 };
-
 void printMenu()
 {
     std::cout << "\n1. Perform addition." << std::endl;
@@ -21,7 +20,6 @@ void printMenu()
     std::cout << "5. Exit." << std::endl;
     std::cout << "Enter choice: ";
 }
-
 int getUserChoice()
 {
     std::string choiceStr;
@@ -31,7 +29,6 @@ int getUserChoice()
     ss >> number;
     return (!ss.fail() && ss.eof()) ? number : 0;
 }
-
 double getNumber()
 {
     double inputNumber;
@@ -48,43 +45,24 @@ double getNumber()
         std::cout << "Please enter a number.\n";
     }
 }
-
-bool loadLibrary(const char *libPath, void *&handle, calculatorFunctions &structForFunctions)
+void loadLibrary(const char *libPath, void *&handle, calculatorFunctions &structForFunctions)
 {
     handle = dlopen(libPath, RTLD_LAZY);
-    if (!handle)
-    {
-        std::cout << "Can't load library: " << dlerror() << std::endl;
-        return false;
-    }
-    dlerror();
     structForFunctions.addTwoNumbers = (calc_fn)dlsym(handle, "addTwoNumbers");
     structForFunctions.subtractTwoNumbers = (calc_fn)dlsym(handle, "subtractTwoNumbers");
     structForFunctions.multiplyTwoNumbers = (calc_fn)dlsym(handle, "multiplyTwoNumbers");
     structForFunctions.divideTwoNumbers = (calc_fn)dlsym(handle, "divideTwoNumbers");
-    const char *error = dlerror();
-    if (error)
-    {
-        std::cout << "Error loading symbols: " << error << std::endl;
-        dlclose(handle);
-        return false;
-    }
-    return true;
 }
-
 int main()
 {
     void *handle = nullptr;
     calculatorFunctions structForFunctions;
-    if (!loadLibrary("/home/parthchittora/Desktop/cppTechTrainingAugust2025_parthChittoraItt/assignment/Week2/Implicit_Linking/build/libcalculator.so", handle, structForFunctions))
-    {
-        return 1;
-    }
-
-    while (true)
+    loadLibrary("/home/parthchittora/Desktop/cppTechTrainingAugust2025_parthChittoraItt/assignment/Week2/Implicit_Linking/build/libcalculator.so", handle, structForFunctions);
+    int choice;
+    while (choice != 5)
     {
         printMenu();
-        int choice = getUserChoice();
+        choice = getUserChoice();
         if (choice > 0 && choice < 5)
         {
             std::cout << "Enter first number : ";
@@ -122,5 +100,6 @@ int main()
             std::cout << "Enter a valid choice." << std::endl;
         }
     }
+    dlclose(handle);
     return 0;
 }
