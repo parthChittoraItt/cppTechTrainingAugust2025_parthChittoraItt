@@ -20,7 +20,7 @@ long getLong()
         std::getline(std::cin, inputLong);
         std::stringstream ss(inputLong);
         ss >> longNum;
-        if (!ss.fail() && ss.eof() && longNum > 0)
+        if (!ss.fail() && ss.eof() && longNum >= 0)
         {
             isValidPositiveLong = true;
         }
