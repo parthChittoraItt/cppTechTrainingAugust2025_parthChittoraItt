@@ -1,0 +1,23 @@
+#include<string>
+const char* enterRow = "Enter number of rows: ";
+const char* enterCol = "Enter number of columns: ";
+const char* inputForMatrix1 = "For Matrix 1:\n";
+const char* inputForMatrix2 = "For Matrix 2:\n";
+const char* additionDimensionMismatch = "\nAddition not possible due to dimension mismatch.\n";
+const char* multiplicationDimensionMismatch="\nAddition not possible due to dimension mismatch.\n";
+const char* invalidChoice = "Invalid choice.\n";
+const char* onMultiplying = "\nOn multiplying:\n";
+const char* onAdding = "\nOn adding:\n";
+const char* positiveOnly = "Please enter a positive number: ";
+const char* numberOnly = "Please enter a positive number: ";
+const char* choice1 = "\n1. Add Matrices\n";
+const char* choice2 = "2. Multiply Matrices\n";
+const char* choice3 = "3. Exit\n";
+const char* enterChoice = "Enter your choice: ";
+const char* oneSpace = " ";
+const char* newLine = "\n";
+const char* enterValueMatrix1 = "\nEnter values for Matrix 1:\n";
+const char* enterValueMatrix2= "\nEnter values for Matrix 2:\n";
+const char* invertedSquareBrackets = "] [";
+const char* closedSquareBracket = "] : ";
+const char* enterValue = "Enter value for matrix[";
