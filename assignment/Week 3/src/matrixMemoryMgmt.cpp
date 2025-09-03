@@ -1,17 +1,17 @@
 #include "matrixMemoryMgmt.h"
-#include "menuFn.h"
+#include "menuFunction.h"
+#include"matrix.h"
 #include <iostream>
 
-double** getMatrixMemory(long rows, long cols) {
-    double** matrix = new double*[rows];
-    for (long i = 0; i < rows; i++)
-        matrix[i] = new double[cols];
-    return matrix;
+void assignMemory(matrix &matrix) {
+    matrix.value = new double*[matrix.row];
+    for (long i = 0; i < matrix.row; i++)
+        matrix.value[i] = new double[matrix.col];
 }
 
-void freeMatrixMemory(double** matrix, long rows) {
-    for (long i = 0; i < rows; ++i)
-        delete[] matrix[i];
-    delete[] matrix;
+void freeMemory(matrix &matrix) {
+    for (long i = 0; i < matrix.row; ++i)
+        delete[] matrix.value[i];
+    delete[] matrix.value;
 }
 

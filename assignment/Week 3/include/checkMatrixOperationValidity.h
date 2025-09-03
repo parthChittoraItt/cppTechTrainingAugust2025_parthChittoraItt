@@ -1,5 +1,6 @@
+#include "matrix.h"
 #ifndef CHECKMATRIXOPERATIONVALIDITY_H
 #define CHECKMATRIXOPERATIONVALIDITY_H
-bool canAdd(long rowsMatrix1, long colsMatrix1, long rowsMatrix2, long colsMatrix2);
-bool canMultiply(long colsMatrix1, long rowsMatrix2) ;
+bool canAdd(matrix &matrix1,matrix &matrix2);
+bool canMultiply(matrix &matrix1,matrix &matrix2) ;
 #endif

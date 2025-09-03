@@ -1,5 +1,6 @@
+#include "matrix.h"
 #ifndef MATRIXMEMORYMGMT_H
 #define MATRIXMEMORYMGMT_H
-double** getMatrixMemory(long rows, long cols);
-void freeMatrixMemory(double** matrix, long rows);
+void assignMemory(matrix &matrix);
+void freeMemory(matrix &matrix);
 #endif
