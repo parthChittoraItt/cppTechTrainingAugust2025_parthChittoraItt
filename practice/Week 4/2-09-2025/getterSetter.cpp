@@ -33,7 +33,7 @@ public:
         return salary;
     }
 };
-int main(int argc, char const *argv[])
+int main()
 {
     Employee emp1;
     emp1.setId(122);
