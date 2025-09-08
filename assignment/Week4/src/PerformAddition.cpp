@@ -6,7 +6,7 @@
 
 bool PerformAddition::canAdd(Matrix &matrix1, Matrix &matrix2)
 {
-    return matrix1.getRows() == matrix2.getRows() || matrix1.getColumns() == matrix2.getColumns();
+    return matrix1.getRows() == matrix2.getRows() && matrix1.getColumns() == matrix2.getColumns();
 }
 
 void PerformAddition::execute(Matrix &matrix1, Matrix &matrix2)
