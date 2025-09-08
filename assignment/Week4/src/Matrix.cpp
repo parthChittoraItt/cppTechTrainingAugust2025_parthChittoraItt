@@ -75,6 +75,8 @@ void Matrix::printMatrix()
 
 Matrix::Matrix()
 {
+    this->rows=0;
+    this->columns=0;
 }
 Matrix::Matrix(long row, long col)
 {

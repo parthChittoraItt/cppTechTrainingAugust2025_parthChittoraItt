@@ -14,7 +14,15 @@ void MatrixCalculator::run()
 
         if (choice == 1 || choice == 2)
         {
-            ProcessChoice::processChoice(choice);
+            Matrix matrix1, matrix2;
+
+            std::cout << inputForMatrix1;
+            matrix1.inputMatrixDimensions();
+
+            std::cout << inputForMatrix2;
+            matrix2.inputMatrixDimensions();
+            
+            ProcessChoice::processChoice(choice,matrix1, matrix2);
         }
         else if (choice != 3)
         {
