@@ -17,7 +17,6 @@ void ProcessChoice::processChoice(long &choice,Matrix& matrix1, Matrix& matrix2)
     {
         operation = new PerformMultiplication();
     }
-
     if(operation){
         operation->execute(matrix1,matrix2);
         delete operation;

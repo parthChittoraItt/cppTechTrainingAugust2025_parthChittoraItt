@@ -20,5 +20,5 @@ static const char* invertedSquareBrackets = "] [";
 static const char* closedSquareBracket = "] : ";
 static const char* enterValue = "Enter value for index[";
 static const char* memoryAssigned = "Memory assigned to matrix.\n\n";
-static const char* memoryFreed = "Memory freed of matrix.\n\n";
+static const char* memoryFreed = "\nMemory freed of matrix.\n";
 #endif
