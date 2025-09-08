@@ -15,14 +15,19 @@ void ProcessChoice::processChoice(long &choice)
     std::cout << inputForMatrix2;
     matrix2.inputMatrixDimensions();
 
+    MatrixOperation* operation = nullptr;
+
     if (choice == 1)
     {
-        PerformAddition addObj;
-        addObj.execute(matrix1, matrix2);
+        operation = new PerformAddition();
     }
     else if (choice == 2)
     {
-        PerformMultiplication mulObj;
-        mulObj.execute(matrix1, matrix2);
+        operation = new PerformMultiplication();
+    }
+
+    if(operation){
+        operation->execute(matrix1,matrix2);
+        delete operation;
     }
 }

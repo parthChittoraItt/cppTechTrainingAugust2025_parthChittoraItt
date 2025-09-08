@@ -98,7 +98,6 @@ Matrix Matrix::operator+(Matrix &matrix2)
 
 Matrix Matrix::operator*(Matrix &matrix2)
 {
-
     Matrix result(rows, matrix2.columns);
     for (int rowIterator = 0; rowIterator < rows; rowIterator++)
     {

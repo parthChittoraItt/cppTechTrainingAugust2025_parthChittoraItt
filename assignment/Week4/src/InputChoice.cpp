@@ -35,7 +35,6 @@ long InputChoice::inputLong()
             std::cout << positiveOnly;
         }
     } while (!valid);
-
     return num;
 }
 
