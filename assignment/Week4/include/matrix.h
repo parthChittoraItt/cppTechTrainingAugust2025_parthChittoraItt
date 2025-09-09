@@ -6,13 +6,8 @@ class Matrix
 protected:
     double **value;
     long rows, columns;
-    void assignMemory();
-    void freeMemory();
 
 public:
-    void inputMatrixDimensions();
-    void printMatrix();
-    void inputMatrixValues();
     Matrix();
     Matrix(long row, long col);
     void setRows(long rows);
@@ -20,6 +15,8 @@ public:
     long getColumns();
     long getRows();
     double **getValue();
+    void assignMemory();
+    void freeMemory();
     Matrix operator+(Matrix &matrix2);
     Matrix operator*(Matrix &matrix2);
     ~Matrix();

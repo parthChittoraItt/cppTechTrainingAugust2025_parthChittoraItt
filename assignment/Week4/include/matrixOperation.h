@@ -4,9 +4,9 @@
 #include "matrix.h"
 
 class MatrixOperation {
-public:
-    virtual void execute(Matrix &matrix1, Matrix &matrix2) = 0;
-    
+ public:
+   Matrix performAddition(Matrix &matrix1, Matrix &matrix2);
+   Matrix performMultiplication(Matrix &matrix1, Matrix &matrix2);
 };
 
 #endif

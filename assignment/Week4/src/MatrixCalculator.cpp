@@ -1,32 +1,60 @@
 #include <iostream>
-#include "inputChoice.h"
-#include "printMenu.h"
-#include "processChoice.h"
+#include "matrix.h"
 #include "constants.h"
 #include "matrixCalculator.h"
+#include "inputHandler.h"
+#include "utility.h"
+#include "matrixOperation.h"
 
-void MatrixCalculator::run()
+bool MatrixCalculator::canAdd(Matrix &matrix1, Matrix &matrix2)
 {
-    do
+    return matrix1.getRows() == matrix2.getRows() && matrix1.getColumns() == matrix2.getColumns();
+}
+
+bool MatrixCalculator::canMultiply(Matrix &matrix1, Matrix &matrix2)
+{
+    return matrix1.getColumns() == matrix2.getRows();
+}
+
+void inputMatrices(Matrix &matrix1, Matrix &matrix2)
+{
+    std::cout << inputForMatrix1;
+    InputHandler::inputMatrixValues(matrix1);
+    std::cout << inputForMatrix2;
+    InputHandler::inputMatrixValues(matrix2);
+}
+
+void MatrixCalculator::calculate(long &choice, Matrix &matrix1, Matrix &matrix2)
+{
+
+    MatrixOperation obj;
+
+    if (choice == 1)
     {
-        PrintMenu::printMenu();
-        choice = InputChoice::inputLong();
-
-        if (choice == 1 || choice == 2)
+        if (canAdd(matrix1, matrix2))
         {
-            Matrix matrix1, matrix2;
-
-            std::cout << inputForMatrix1;
-            matrix1.inputMatrixDimensions();
-
-            std::cout << inputForMatrix2;
-            matrix2.inputMatrixDimensions();
-            
-            ProcessChoice::processChoice(choice,matrix1, matrix2);
+            inputMatrices(matrix1, matrix2);
+            Matrix result = obj.performAddition(matrix1, matrix2);
+            std::cout << onAdding;
+            Utility::printMatrix(result);
         }
-        else if (choice != 3)
+        else
         {
-            std::cout << invalidChoice;
+            std::cout << additionDimensionMismatch;
         }
-    } while (choice != 3);
+    }
+    else if (choice == 2)
+    {
+        if (canMultiply(matrix1, matrix2))
+        {
+            inputMatrices(matrix1, matrix2);
+            Matrix result = obj.performAddition(matrix1, matrix2);
+            std::cout << onMultiplying;
+            Utility::printMatrix(result);
+        }
+        else
+        {
+            std::cout << multiplicationDimensionMismatch;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 #include "matrix.h"
-#include "inputChoice.h"
 #include "constants.h"
+#include <iostream>
 
 void Matrix::setRows(long rows)
 {
@@ -42,41 +42,9 @@ void Matrix::freeMemory()
     std::cout << memoryFreed;
 }
 
-void Matrix::inputMatrixDimensions()
-{
-    std::cout << enterRows;
-    this->rows = InputChoice::inputLong();
-    std::cout << enterColumns;
-    this->columns = InputChoice::inputLong();
-    this->assignMemory();
-}
-
-void Matrix::inputMatrixValues()
-{
-    for (long rowIterator = 0; rowIterator < rows; rowIterator++)
-    {
-        for (long colIterator = 0; colIterator < columns; colIterator++)
-        {
-            std::cout << enterValue << rowIterator << invertedSquareBrackets << colIterator << closedSquareBracket;
-            value[rowIterator][colIterator] = InputChoice::inputDouble();
-        }
-    }
-}
-
-void Matrix::printMatrix()
-{
-    for (long rowIterator = 0; rowIterator < rows; rowIterator++)
-    {
-        for (long colIterator = 0; colIterator < columns; colIterator++)
-            std::cout << value[rowIterator][colIterator] << oneSpace;
-        std::cout << std::endl;
-    }
-}
-
 Matrix::Matrix()
 {
-    this->rows=0;
-    this->columns=0;
+  
 }
 Matrix::Matrix(long row, long col)
 {
@@ -119,3 +87,4 @@ Matrix::~Matrix()
 {
     this->freeMemory();
 }
+
