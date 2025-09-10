@@ -9,6 +9,6 @@ private:
 public:
     bool canAdd(Matrix &matrix1, Matrix &matrix2);
     bool canMultiply(Matrix &matrix1, Matrix &matrix2);
-    void calculate(long &choice, Matrix &matrix1, Matrix &matrix2);
+    Matrix calculate(long &choice, Matrix &matrix1, Matrix &matrix2);
 };
 #endif

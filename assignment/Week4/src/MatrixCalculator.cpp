@@ -24,23 +24,18 @@ void inputMatrices(Matrix &matrix1, Matrix &matrix2)
     InputHandler::inputMatrixValues(matrix2);
 }
 
-void MatrixCalculator::calculate(long &choice, Matrix &matrix1, Matrix &matrix2)
+Matrix MatrixCalculator::calculate(long &choice, Matrix &matrix1, Matrix &matrix2)
 {
 
     MatrixOperation obj;
-
+    Matrix result;
     if (choice == 1)
     {
         if (canAdd(matrix1, matrix2))
         {
             inputMatrices(matrix1, matrix2);
-            Matrix result = obj.performAddition(matrix1, matrix2);
+            result = obj.performAddition(matrix1, matrix2);
             std::cout << onAdding;
-            Utility::printMatrix(result);
-        }
-        else
-        {
-            std::cout << additionDimensionMismatch;
         }
     }
     else if (choice == 2)
@@ -48,13 +43,9 @@ void MatrixCalculator::calculate(long &choice, Matrix &matrix1, Matrix &matrix2)
         if (canMultiply(matrix1, matrix2))
         {
             inputMatrices(matrix1, matrix2);
-            Matrix result = obj.performAddition(matrix1, matrix2);
+            result = obj.performMultiplication(matrix1, matrix2);
             std::cout << onMultiplying;
-            Utility::printMatrix(result);
-        }
-        else
-        {
-            std::cout << multiplicationDimensionMismatch;
         }
     }
+    return result;
 }

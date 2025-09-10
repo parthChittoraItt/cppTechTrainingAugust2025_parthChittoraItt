@@ -16,12 +16,19 @@ int main()
         choice = InputHandler::inputLong();
         if (choice == 1 || choice == 2)
         {
-            Matrix matrix1, matrix2;
+            Matrix matrix1, matrix2,result;
             std::cout << inputForMatrix1;
             InputHandler::inputMatrixDimensions(matrix1);
             std::cout << inputForMatrix2;
             InputHandler::inputMatrixDimensions(matrix2);
-            obj.calculate(choice, matrix1, matrix2);
+            result = obj.calculate(choice, matrix1, matrix2);
+
+            if(result.getValue()==nullptr){
+                std::cout<<operationDimensionMismatch;
+            }
+            else{
+                Utility::printMatrix(result);
+            }
         }
         else if (choice != 3)
         {

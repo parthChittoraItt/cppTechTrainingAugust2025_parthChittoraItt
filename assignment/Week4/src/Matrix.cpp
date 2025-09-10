@@ -30,27 +30,39 @@ void Matrix::assignMemory()
     {
         value[rowIterator] = new double[columns];
     }
-    std::cout << memoryAssigned;
 }
 
 void Matrix::freeMemory()
 {
-    for (long rowIterator = 0; rowIterator < rows; rowIterator++)
-        delete[] value[rowIterator];
-    delete[] value;
-    value = nullptr;
-    std::cout << memoryFreed;
+   if (value != nullptr)  
+    {
+        for (long i = 0; i < rows; i++)
+        {
+            delete[] value[i];
+        }
+        delete[] value;
+        value = nullptr;
+    }
 }
 
 Matrix::Matrix()
 {
-  
+    this->rows = 0;
+    this->columns = 0;
+    this->value = nullptr;
 }
 Matrix::Matrix(long row, long col)
 {
-    this->rows = row;
-    this->columns = col;
-    this->assignMemory();
+    if (row > 0 && col > 0)
+    {
+        this->rows = row;
+        this->columns = col;
+        this->assignMemory();
+    }
+    else
+    {
+        this->value = nullptr;
+    }
 }
 
 Matrix Matrix::operator+(Matrix &matrix2)
@@ -85,6 +97,54 @@ Matrix Matrix::operator*(Matrix &matrix2)
 
 Matrix::~Matrix()
 {
-    this->freeMemory();
+    if (value != nullptr)
+        this->freeMemory();
 }
 
+Matrix::Matrix(const Matrix &matrix)
+{
+    rows = matrix.rows;
+    columns = matrix.columns;
+    if (rows > 0 && columns > 0)
+    {
+        assignMemory();
+        for (long rowIterator = 0; rowIterator < rows; rowIterator++)
+        {
+            for (long colIterator = 0; colIterator < columns; colIterator++)
+            {
+                value[rowIterator][colIterator] = matrix.value[rowIterator][colIterator];
+            }
+        }
+    }
+    else
+    {
+        value = nullptr;
+    }
+}
+
+Matrix &Matrix::operator=(const Matrix &matrix)
+{
+    if (this == &matrix)
+        return *this;
+
+    freeMemory();
+
+    rows = matrix.rows;
+    columns = matrix.columns;
+    if (rows > 0 && columns > 0)
+    {
+        assignMemory();
+        for (long rowIterator = 0; rowIterator < rows; rowIterator++)
+        {
+            for (long colIterator = 0; colIterator < columns; colIterator++)
+            {
+                value[rowIterator][colIterator] = matrix.value[rowIterator][colIterator];
+            }
+        }
+    }
+    else
+    {
+        value = nullptr;
+    }
+    return *this;
+}

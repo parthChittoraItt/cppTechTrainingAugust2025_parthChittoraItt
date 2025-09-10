@@ -10,6 +10,8 @@ protected:
 public:
     Matrix();
     Matrix(long row, long col);
+    Matrix(const Matrix &other);
+    Matrix& operator=(const Matrix &other);
     void setRows(long rows);
     void setColumns(long columns);
     long getColumns();
