@@ -47,13 +47,10 @@ void Matrix::freeMemory()
 
 Matrix::Matrix(long row, long col)
 {
-    if (row > 0 && col > 0)
-    {
-        this->rows = row;
-        this->columns = col;
-        this->value = nullptr;
-        this->assignMemory();
-    }
+    this->rows = row;
+    this->columns = col;
+    this->value = nullptr;
+    this->assignMemory();
 }
 
 Matrix Matrix::operator+(Matrix &matrix2)
@@ -88,8 +85,7 @@ Matrix Matrix::operator*(Matrix &matrix2)
 
 Matrix::~Matrix()
 {
-    if (value != nullptr)
-        this->freeMemory();
+    this->freeMemory();
 }
 
 Matrix::Matrix(const Matrix &matrix)
@@ -98,7 +94,7 @@ Matrix::Matrix(const Matrix &matrix)
     columns = matrix.columns;
     if (rows > 0 && columns > 0)
     {
-        assignMemory();
+        this->assignMemory();
         for (long rowIterator = 0; rowIterator < rows; rowIterator++)
         {
             for (long colIterator = 0; colIterator < columns; colIterator++)
