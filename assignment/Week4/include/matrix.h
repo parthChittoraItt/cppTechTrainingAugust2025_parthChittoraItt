@@ -8,8 +8,7 @@ protected:
     long rows, columns;
 
 public:
-    Matrix();
-    Matrix(long row, long col);
+    Matrix(long row=0, long col=0);
     Matrix(const Matrix &other);
     Matrix& operator=(const Matrix &other);
     void setRows(long rows);

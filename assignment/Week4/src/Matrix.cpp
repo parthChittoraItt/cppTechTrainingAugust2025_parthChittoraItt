@@ -18,7 +18,7 @@ long Matrix::getRows()
 {
     return this->rows;
 }
-double** Matrix::getValue()
+double **Matrix::getValue()
 {
     return this->value;
 }
@@ -34,7 +34,7 @@ void Matrix::assignMemory()
 
 void Matrix::freeMemory()
 {
-   if (value != nullptr)  
+    if (value != nullptr)
     {
         for (long i = 0; i < rows; i++)
         {
@@ -45,23 +45,14 @@ void Matrix::freeMemory()
     }
 }
 
-Matrix::Matrix()
-{
-    this->rows = 0;
-    this->columns = 0;
-    this->value = nullptr;
-}
 Matrix::Matrix(long row, long col)
 {
     if (row > 0 && col > 0)
     {
         this->rows = row;
         this->columns = col;
-        this->assignMemory();
-    }
-    else
-    {
         this->value = nullptr;
+        this->assignMemory();
     }
 }
 

@@ -26,7 +26,6 @@ void inputMatrices(Matrix &matrix1, Matrix &matrix2)
 
 Matrix MatrixCalculator::calculate(long &choice, Matrix &matrix1, Matrix &matrix2)
 {
-
     MatrixOperation obj;
     Matrix result;
     if (choice == 1)
