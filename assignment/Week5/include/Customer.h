@@ -30,5 +30,7 @@ public:
     void displayMenu() override;
     bool processMenu(int customerChoice, long accountNumber, int pin) override;
     std::vector<IAccount *> &getAccounts() override { return accounts; }
+
+    ~Customer();
 };
 #endif

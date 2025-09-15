@@ -214,3 +214,17 @@ bool Bank::runCustomerSession(std::string customerName, std::string customerPass
     }
     return true;
 }
+
+Bank::~Bank()
+{
+    for (int customerIterator = 0; customerIterator < customers.size(); customerIterator++)
+    {
+        delete customers[customerIterator];
+    }
+    customers.clear();
+    for (int accountIterator = 0; accountIterator < accounts.size(); accountIterator++)
+    {
+        delete accounts[accountIterator];
+    }
+    accounts.clear();
+}

@@ -9,11 +9,11 @@
 class Bank : public IBank
 {
 
-public:
+private:
     IAdmin &admin;
     std::vector<ICustomer *> customers;
     std::vector<IAccount *> accounts;
-
+public : 
     Bank(IAdmin &admin);
     void addCustomer(ICustomer *customer) override { customers.push_back(customer); }
     void addAccount(IAccount *account) override { accounts.push_back(account); }
@@ -31,5 +31,6 @@ public:
     bool removeAccount(IAccount *account) override;
     bool runCustomerSession(std::string customerName, std::string customerPassword) override;
     bool runAdminSession(std::string adminName, std::string adminPassword) override;
+    ~Bank();
 };
 #endif

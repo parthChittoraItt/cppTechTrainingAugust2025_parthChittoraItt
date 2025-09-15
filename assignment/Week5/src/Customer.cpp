@@ -172,3 +172,8 @@ bool Customer::processMenu(int customerChoice, long accountNumber, int pin)
 
     return true;
 }
+
+Customer::~Customer()
+{
+    accounts.clear();
+}
