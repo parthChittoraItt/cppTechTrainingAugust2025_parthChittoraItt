@@ -18,6 +18,6 @@ public:
     virtual bool removeAccount(IAccount *account) = 0;
     virtual bool runCustomerSession(std::string customerName, std::string customerPassword) = 0;
     virtual bool runAdminSession(std::string adminName, std::string adminPassword) = 0;
-    virtual ~IBank() = default;
+    virtual ~IBank(){};
 };
 #endif

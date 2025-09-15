@@ -1,7 +1,5 @@
 #include "Utility.h"
 
-static long accountCounter = 1000;
-
 Admin::Admin(std::string adminName, std::string adminPassword) : User(adminName, adminPassword) {}
 
 ICustomer *Admin::createCustomer(std::string customerName, std::string customerPassword)
@@ -11,6 +9,7 @@ ICustomer *Admin::createCustomer(std::string customerName, std::string customerP
 }
 IAccount *Admin::openAccount(std::string customerName, int pin)
 {
+    static long accountCounter = 1000;
     IAccount *newAccount = new Account(accountCounter++, customerName, pin);
     return newAccount;
 }

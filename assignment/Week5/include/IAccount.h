@@ -10,7 +10,7 @@ public:
     std::string customerName;
     int pin;
     std::vector<std::string> transactionHistory;
-    virtual ~IAccount() = default;
+    virtual ~IAccount() {};
 };
 
 #endif

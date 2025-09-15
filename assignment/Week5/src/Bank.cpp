@@ -82,9 +82,9 @@ bool Bank::removeExistingCustomer()
 bool Bank::listAllCustomers()
 {
     std::cout << customerHeader;
-    for (int i = 0; i < customers.size(); i++)
+    for (int customerIterator = 0; customerIterator < customers.size(); customerIterator++)
     {
-        std::cout << customers[i]->getUsername() << nextLine;
+        std::cout << customers[customerIterator]->getUsername() << nextLine;
     }
     return true;
 }
@@ -102,7 +102,7 @@ bool Bank::removeCustomer(ICustomer *customer)
     return false;
 }
 
-bool Bank::removeAccount(IAccount *account)
+bool Bank::removeAccount(IAccount* account)
 {
     for (int accountIterator = 0; accountIterator < accounts.size(); accountIterator++)
     {
@@ -125,7 +125,7 @@ ICustomer *Bank::findCustomer(std::string &name)
     return nullptr;
 }
 
-IAccount *Bank::findAccount(long accountNumber)
+IAccount* Bank::findAccount(long accountNumber)
 {
     for (int accountIterator = 0; accountIterator < accounts.size(); accountIterator++)
     {

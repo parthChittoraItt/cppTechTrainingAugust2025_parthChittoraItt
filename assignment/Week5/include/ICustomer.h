@@ -17,6 +17,6 @@ public:
     virtual std::vector<std::string> fetchBankStatement(long accountNumber, int pin) = 0;
     virtual bool processMenu(int choice, long accountNumber, int pin) = 0;
     virtual std::vector<IAccount *> &getAccounts() = 0;
-    virtual ~ICustomer() = default;
+    virtual ~ICustomer(){};
 };
 #endif
