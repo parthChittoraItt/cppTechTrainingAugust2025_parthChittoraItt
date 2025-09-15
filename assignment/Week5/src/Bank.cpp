@@ -137,7 +137,6 @@ IAccount *Bank::findAccount(long accountNumber)
 
 bool Bank::processAdminChoice(int adminChoice)
 {
-
     switch (adminChoice)
     {
     case 1:
@@ -163,6 +162,7 @@ bool Bank::processAdminChoice(int adminChoice)
     }
     return true;
 }
+
 bool Bank::runAdminSession(std::string userName, std::string password)
 {
     int adminChoice;

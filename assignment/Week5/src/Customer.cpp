@@ -70,6 +70,7 @@ void Customer::displayMenu()
 {
     std::cout << customerMenu;
 }
+
 bool Customer::processDepositRequest(long accountNumber, int pin)
 {
     double amount;
@@ -105,7 +106,7 @@ bool Customer::showBalance(long accountNumber, int pin)
 {
     double balance = checkBalance(accountNumber, pin);
     if (balance != -1)
-        std::cout << currentBalance << balance << nextLine;
+        std::cout << currentBalance << std::to_string(balance) << nextLine;
     else
         std::cout << invalidCredentials;
     return true;
