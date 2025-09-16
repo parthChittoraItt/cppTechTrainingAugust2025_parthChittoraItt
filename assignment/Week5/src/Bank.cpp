@@ -178,6 +178,7 @@ bool Bank::runAdminSession(std::string userName, std::string password)
     else
     {
         std::cout << invalidCredentials;
+        return false;
     }
     return true;
 }
