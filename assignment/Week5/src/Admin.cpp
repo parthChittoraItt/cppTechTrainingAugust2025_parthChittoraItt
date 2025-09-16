@@ -7,6 +7,7 @@ ICustomer *Admin::createCustomer(std::string customerName, std::string customerP
     ICustomer *newCustomer = new Customer(customerName, customerPassword);
     return newCustomer;
 }
+
 IAccount *Admin::openAccount(std::string customerName, int pin)
 {
     static long accountCounter = 1000;
