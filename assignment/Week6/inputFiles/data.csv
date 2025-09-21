@@ -1,0 +1,4 @@
+ID,Name,Age,Skills,IsStudent
+101,Parth,22,"(C++ | Python | SQL)",true
+102,Riya,21,"(Java | HTML | CSS)",true
+103,Aman,23,"(C# | JavaScript)",false

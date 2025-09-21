@@ -1,0 +1,36 @@
+{
+  "students": [
+    {
+      "id": 101,
+      "name": "Parth",
+      "age": 21,
+      "skills": [
+        "C++",
+        "AWS",
+        "Java"
+      ],
+      "isStudent": true
+    },
+    {
+      "id": 102,
+      "name": "Yatharth",
+      "age": 21,
+      "skills": [
+        "C++",
+        "Docker",
+        "JavaScript"
+      ],
+      "isStudent": true
+    },
+    {
+      "id": 103,
+      "name": "Aman",
+      "age": 23,
+      "skills": [
+        "C#",
+        "JavaScript"
+      ],
+      "isStudent": false
+    }
+  ]
+}

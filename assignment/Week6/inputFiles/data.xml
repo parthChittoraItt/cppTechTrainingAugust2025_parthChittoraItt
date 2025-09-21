@@ -1,0 +1,35 @@
+<students>
+    <student>
+        <id>101</id>
+        <name>Parth</name>
+        <age>21</age>
+        <skills>
+            <skill>CPP</skill>
+            <skill>AWS</skill>
+            <skill>Java</skill>
+        </skills>
+        <isStudent>true</isStudent>
+    </student>
+    <student>
+        <id>102</id>
+        <name>Yashika</name>
+        <age>24</age>
+        <skills>
+            <skill>Java</skill>
+            <skill>C++</skill>
+            <skill>SpringBoot</skill>
+        </skills>
+        <isStudent>true</isStudent>
+    </student>
+    <student>
+        <id>103</id>
+        <name>Arpit</name>
+        <age>24</age>
+        <skills>
+            <skill>C++</skill>
+            <skill>React</skill>
+            <skill>NodeJS</skill>
+        </skills>
+        <isStudent>false</isStudent>
+    </student>
+</students>
