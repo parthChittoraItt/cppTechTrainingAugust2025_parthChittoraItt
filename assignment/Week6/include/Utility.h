@@ -13,7 +13,7 @@ class Utility {
 public:
     static std::string getExtension( std::string &filename);
     static IParser* createParser( std::string &ext);
-    static void Utility::printResult(std::vector<std::string> result);
+    static void printResult(std::vector<std::string> result);
 };
 
 #endif

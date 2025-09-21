@@ -48,7 +48,7 @@ std::vector<std::string> JSONParser::fetchJsonEntries(nlohmann::json &jsonObject
     }
     else if (jsonObject.is_array())
     {
-        for (int entry = 0; entry < jsonObject.size(); entry++)
+        for (auto entry = 0; entry < jsonObject.size(); entry++)
         {
             if (jsonObject[entry].is_primitive())
             {
