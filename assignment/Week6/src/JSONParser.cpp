@@ -4,26 +4,18 @@
 std::vector<std::string> JSONParser::parse(std::string &filename)
 {
     std::vector<std::string> jsonOutput;
-    try
+    std::ifstream fin(filename.c_str());
+    if (!fin.is_open())
     {
-        std::ifstream fin(filename.c_str());
-        if (!fin.is_open())
-        {
-            jsonOutput.push_back(failedJsonLoading);
-            return jsonOutput;
-        }
-        nlohmann::json jsonObject;
-        fin >> jsonObject;
+        jsonOutput.push_back(failedJsonLoading);
+        return jsonOutput;
+    }
+    nlohmann::json jsonObject;
+    fin >> jsonObject;
 
-        jsonOutput.push_back(jsonParsedData);
-        std::vector<std::string> jsonEntries = fetchJsonEntries(jsonObject);
-        jsonOutput.insert(jsonOutput.end(), jsonEntries.begin(), jsonEntries.end());
-    }
-    catch (std::exception &exception)
-    {
-        jsonOutput.push_back(jsonParseError);
-        jsonOutput.push_back(exception.what());
-    }
+    jsonOutput.push_back(jsonParsedData);
+    std::vector<std::string> jsonEntries = fetchJsonEntries(jsonObject);
+    jsonOutput.insert(jsonOutput.end(), jsonEntries.begin(), jsonEntries.end());
     return jsonOutput;
 }
 

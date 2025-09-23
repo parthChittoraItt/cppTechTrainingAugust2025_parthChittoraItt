@@ -9,6 +9,7 @@ static const char* colon = " : ";
 static const char* failedJsonLoading = "Failed to open JSON file.";
 static const char* jsonParsedData ="JSON Parsed data:";
 static const char* jsonParseError ="JSON parsing error: ";
+static const char* parsingError ="Parsing error: ";
 static const char* csv ="csv";
 static const char* json ="json";
 static const char* xml ="xml";

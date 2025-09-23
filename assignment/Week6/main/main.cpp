@@ -8,6 +8,7 @@ int main()
     int userChoice;
     do
     {
+        std::vector<std::string> result;
         std::cout << inputChoice;
         userChoice = inputInt();
         if (userChoice == 1)
@@ -18,7 +19,15 @@ int main()
             IParser *parser = Utility::createParser(extension);
             if (parser)
             {
-                std::vector<std::string> result = parser->parse(filename);
+                try
+                {
+                    result = parser->parse(filename);
+                }
+                catch (std::exception &exception)
+                {
+                    result.push_back(parsingError);
+                    result.push_back(exception.what());
+                }
                 Utility::printResult(result);
             }
             else
